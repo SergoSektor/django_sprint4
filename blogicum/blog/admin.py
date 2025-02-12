@@ -7,63 +7,54 @@ from .models import Category, Location, Post, Comment
 class CategoryAdmin(admin.ModelAdmin):
     list_display = (
         'title',
-        'is_published',
-        'slug',
         'description',
-        'created_at',
-    )
-    list_editable = (
         'is_published',
+        'created_at',
+        'slug'
     )
-    search_fields = ('title',)
-    list_filter = ('is_published',)
-    list_display_links = ('title',)
+    list_filter = (
+        'title',
+    )
+    search_fields = (
+        'title',
+    )
 
 
 @admin.register(Location)
 class LocationAdmin(admin.ModelAdmin):
     list_display = (
         'name',
-        'is_published',
         'created_at',
+        'is_published'
     )
-    list_editable = (
-        'is_published',
+    list_filter = (
+        'name',
     )
-    search_fields = ('name',)
-    list_filter = ('is_published',)
-    list_display_links = ('name',)
+    search_fields = (
+        'name',
+    )
 
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     list_display = (
         'title',
-        'is_published',
-        'category',
-        'author',
-        'location',
         'text',
         'pub_date',
-        'created_at',
+        'author',
+        'category',
+        'location',
     )
-    list_editable = (
-        'is_published',
-        'category'
+    list_filter = (
+        'author',
+        'category',
+        'location'
     )
-    search_fields = ('title',)
-    list_filter = ('category', 'is_published',)
-    list_display_links = ('title',)
+    search_fields = (
+        'title',
+    )
 
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = (
-        'text',
-        'post',
-        'created_at',
-        'author'
-    )
-
-
-admin.site.empty_value_display = 'Не задано'
+    pass
