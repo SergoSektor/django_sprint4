@@ -1,5 +1,4 @@
 {% load static %}
-{% with request.resolver_match.view_name as view_name %}
 <header>
   <nav class="navbar navbar-light" style="background-color: lightskyblue">
     <div class="container">
@@ -7,20 +6,15 @@
         <img src="{% static 'img/logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
         Блогикум
       </a>
-        <ul class="nav nav-pills">
+      {% with request.resolver_match.view_name as view_name %}
+        <ul class="nav  nav-pills">
           <li class="nav-item">
-            <a
-              class="nav-link {% if view_name == 'pages:about' %}text-white{% endif %}"
-              href="{% url 'pages:about' %}"
-            >
+            <a class="nav-link {% if view_name == 'pages:about' %} text-white {% endif %}" href="{% url 'pages:about' %}">
               О проекте
             </a>
           </li>
           <li class="nav-item">
-            <a
-              class="nav-link {% if view_name == 'pages:rules' %}text-white{% endif %}"
-              href="{% url 'pages:rules' %}"
-            >
+            <a class="nav-link {% if view_name == 'pages:rules' %} text-white {% endif %}" href="{% url 'pages:rules' %}">
               Правила
             </a>
           </li>
@@ -42,7 +36,7 @@
             </div>
           {% endif %}
         </ul>
+      {% endwith %}
     </div>
   </nav>
 </header>
-{% endwith %}

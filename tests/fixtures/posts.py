@@ -68,7 +68,7 @@ def post_with_another_category(
 
 @pytest.fixture
 def post_of_another_author(
-    mixer: Mixer, user, another_user, published_location, published_category
+    mixer: Mixer, user, another_user,  published_location, published_category
 ):
     assert user.id != another_user.id
     return mixer.blend(
@@ -88,7 +88,6 @@ def post_with_published_location(
     image_file = ImageFile(img_io, name='temp_image.jpg')
     post = mixer.blend(
         'blog.Post',
-        is_published=True,
         location=published_location,
         category=published_category,
         author=user,

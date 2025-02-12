@@ -110,26 +110,26 @@ class EditCommentFormTester(BaseFormTester):
     ) -> HttpResponse:
         try:
             return super().test_edit_item(updated_form, qs, item_adapter)
-        except UnauthorizedEditException as error:
+        except UnauthorizedEditException:
             raise AssertionError(
                 "Убедитесь, что аутентифицированный пользователь не может"
                 " редактировать чужие комментарии."
-            ) from error
-        except UnauthenticatedEditException as error:
+            )
+        except UnauthenticatedEditException:
             raise AssertionError(
                 "Убедитесь, что неаутентифицированный пользователь не может"
                 " редактировать комментарии."
-            ) from error
-        except AuthenticatedEditException as error:
+            )
+        except AuthenticatedEditException:
             raise AssertionError(
                 "Убедитесь, что аутентифицированный пользователь может"
                 " редактировать свои комментарии."
-            ) from error
-        except DatabaseCreationException as error:
+            )
+        except DatabaseCreationException:
             raise AssertionError(
                 "Убедитесь, что при редактировании комментария в базе данных"
                 " не создаётся новый объект комментария."
-            ) from error
+            )
 
     def redirect_error_message(
         self, by_user: str, redirect_to_page: Union[TitledUrlRepr, str]

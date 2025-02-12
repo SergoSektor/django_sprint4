@@ -50,7 +50,7 @@ class TextareaMismatchException(FormValidationException):
     pass
 
 
-class FormValidationException(Exception):  # type: ignore
+class FormValidationException(Exception):
     pass
 
 
@@ -264,7 +264,7 @@ class BaseFormTester(BaseTester):
             response, created = self.try_create_item(
                 form, qs, submitter, assert_created
             )
-        except FormValidationException as error:
+        except FormValidationException:
             student_form_fields = [
                 self._ModelAdapter(form.Meta.model).get_student_field_name(k)
                 for k in form.data.keys()
@@ -272,7 +272,7 @@ class BaseFormTester(BaseTester):
             student_form_fields_str = ", ".join(student_form_fields)
             raise AssertionError(
                 self.validation_error_message(student_form_fields_str)
-            ) from error
+            )
         if assert_created:
             assert (
                 self._ModelAdapter(created).author
@@ -304,9 +304,8 @@ class BaseFormTester(BaseTester):
                     ),
                     assert_created=True,
                 )
-            except ItemNotCreatedException as error:
-                raise AssertionError(
-                    self.item_not_created_assertion_msg) from error
+            except ItemNotCreatedException:
+                raise AssertionError(self.item_not_created_assertion_msg)
 
             created_items.append(created)
             assert (
@@ -525,7 +524,7 @@ class AuthorisedSubmitTester(SubmitTester):
         self.client = tester.user_client
 
     @staticmethod
-    def get_test_response_redirect_cbk(  # type: ignore
+    def get_test_response_redirect_cbk(
         tester: BaseTester,
         by_user: Optional[str] = None,
         redirect_to_page: Optional[str] = None,
