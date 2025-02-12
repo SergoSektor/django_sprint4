@@ -1,11 +1,14 @@
-from datetime import datetime, timedelta
+from datetime import timedelta
+from io import BytesIO
 from typing import Tuple
 
 import pytest
-import pytz
+from PIL import Image
+from django.core.files.images import ImageFile
 from django.db.models import Model
 from django.forms import BaseForm
 from django.test import Client
+from django.utils import timezone
 from mixer.backend.django import Mixer
 
 from conftest import (
@@ -28,7 +31,7 @@ def posts_with_unpublished_category(mixer: Mixer, user: Model):
 @pytest.fixture
 def future_posts(mixer: Mixer, user: Model):
     date_later_now = (
-        datetime.now(tz=pytz.UTC) + timedelta(days=date)
+        timezone.now() + timedelta(days=date)
         for date in range(1, 11)
     )
     return mixer.cycle(N_PER_FIXTURE).blend(
@@ -65,7 +68,7 @@ def post_with_another_category(
 
 @pytest.fixture
 def post_of_another_author(
-    mixer: Mixer, user, another_user,  published_location, published_category
+    mixer: Mixer, user, another_user, published_location, published_category
 ):
     assert user.id != another_user.id
     return mixer.blend(
@@ -78,14 +81,20 @@ def post_of_another_author(
 
 @pytest.fixture
 def post_with_published_location(
-    mixer: Mixer, user, published_location, published_category
-):
-    return mixer.blend(
-        "blog.Post",
+        mixer: Mixer, user, published_location, published_category):
+    img = Image.new('RGB', (100, 100), color=(73, 109, 137))
+    img_io = BytesIO()
+    img.save(img_io, format='JPEG')
+    image_file = ImageFile(img_io, name='temp_image.jpg')
+    post = mixer.blend(
+        'blog.Post',
+        is_published=True,
         location=published_location,
         category=published_category,
         author=user,
+        image=image_file
     )
+    return post
 
 
 @pytest.fixture

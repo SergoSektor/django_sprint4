@@ -1,45 +1,93 @@
-# Описание.
+# Блогикум часть 3
 
-## Проект django_sprint4.
+## Это часть работы над проектом Блогикум:
+
+- [Блогикум часть 1](https://github.com/Sergey-Tsepilov/django_sprint1)
+- [Блогикум часть 2](https://github.com/Sergey-Tsepilov/django_sprint3)
+- Блогикум часть 3 ← _этот репозиторий_
 
 ## Технологии:
-* Python 3.7
-* Django 3.2
-* SQlite3
 
-## Описание проекта
+- Python 3.9.13
+- Django 3.2.25
+- SQLite
 
-Доработка проекта django_sprint3.
-Финальная версия небольшой социальной сети для публикации личных дневников. 
-![image](https://github.com/RiSSoL-86/django_sprint4/assets/110422516/b744dfec-ac8a-4f60-9428-a8ce106f41b5)
+## Установка (Windows):
 
+1. Клонирование репозитория
 
-## Как запустить проект:
+```
+git clone https://github.com/Sergey-Tsepilov/django_sprint4.git
+```
 
-* Клонировать репозиторий и перейти в него в командной строке:
+2. Переход в директорию django_sprint4
 
-        git clone git@github.com:RiSSoL-86/django_sprint4.git
-        cd django_sprint4
+```
+cd django_sprint4
+```
 
-* Cоздать и активировать виртуальное окружение:
+3. Создание виртуального окружения
 
-        python -m venv venv
-        source venv/Scripts/activate
+```
+python -m venv venv
+```
 
-* Установить зависимости из файла requirements.txt:
+4. Активация виртуального окружения
 
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+```
+source venv/Scripts/activate
+```
 
-* Выполнить миграции:
+5. Обновите pip
 
-        python manage.py migrate
+```
+python -m pip install --upgrade pip
+```
 
+6. Установка зависимостей
 
-* Запустить проект:
+```
+pip install -r requirements.txt
+```
 
-        python manage.py runserver
+7. Переход в директорию blogicum
 
-* Перейти на локальный сервер:
+```
+cd blogicum
+```
 
-        http://127.0.0.1:8000/
+8. Применение миграций
+
+```
+python manage.py migrate
+```
+
+9. Загрузить фикстуры в БД
+
+```
+python manage.py loaddata db.json
+```
+
+10. Создать суперпользователя
+
+```
+python manage.py createsuperuser
+```
+
+11. Запуск проекта, введите команду
+
+```
+python manage.py runserver
+```
+
+12. Отмена
+
+```
+Ctrl + C
+```
+
+13. Деактивация виртуального окружения
+
+```
+deactivate
+```
