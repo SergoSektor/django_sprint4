@@ -5,7 +5,7 @@ from typing import Tuple, Any, Type, List, Union
 
 import django.test.client
 import pytest
-import pytz  # type: ignore
+import pytz
 from django.db.models import TextField, DateTimeField, ForeignKey, Model
 from django.forms import BaseForm
 from django.utils import timezone
@@ -87,7 +87,7 @@ def create_comment_creation_forms(
     except FormValidationException as e:
         raise AssertionError(
             "Убедитесь, что для валидации"
-            f" {creation_tester.of_which_form} достаточно заполнить следующие"  # type: ignore
+            f" {creation_tester.of_which_form} достаточно заполнить следующие"
             f" поля: {list(forms_to_create[0].data.keys())}. При валидации"
             f" формы возникли следующие ошибки: {e}"
         )
@@ -196,7 +196,7 @@ def test_comment(
         user_client=user_client,
         another_user_client=another_user_client,
         unlogged_client=unlogged_client,
-        **update_props,  # type: ignore
+        **update_props,
     )
 
     item_to_delete_adapter = item_to_edit_adapter
@@ -208,7 +208,7 @@ def test_comment(
         item_adapter=item_to_delete_adapter,
     ).test_delete_item(
         qs=item_to_delete_adapter.item_cls.objects.all(),
-        delete_url_addr=delete_url_addr,  # type: ignore
+        delete_url_addr=delete_url_addr,
     )
 
     status_404_on_edit_deleted_comment_err_msg = (

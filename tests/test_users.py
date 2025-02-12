@@ -77,7 +77,7 @@ def test_custom_err_handlers(client):
     }
     for template in auth_templates:
         try:
-            fpath: Path = Path(settings.TEMPLATES_DIR) / "registration" / template  # type: ignore
+            fpath: Path = Path(settings.TEMPLATES_DIR) / "registration" / template
         except Exception as e:
             raise AssertionError(
                 'Убедитесь, что переменная TEMPLATES_DIR в настройках проекта '
@@ -85,7 +85,7 @@ def test_custom_err_handlers(client):
                 '(например, экземпляром pathlib.Path). '
                 f'При операции Path(settings.TEMPLATES_DIR) / "registration", возникла ошибка: {e}'
             )
-        frpath: Path = fpath.relative_to(settings.BASE_DIR)  # type: ignore
+        frpath: Path = fpath.relative_to(settings.BASE_DIR)
         assert os.path.isfile(
             fpath.resolve()
         ), f"Убедитесь, что файл шаблона `{frpath}` существует."
@@ -111,18 +111,18 @@ def test_profile(
     assert response.status_code == HTTPStatus.NOT_FOUND, (
         status_code_not_404_err_msg)
 
-    user_response: HttpResponse = user_client.get(user_url)  # type: ignore
+    user_response: HttpResponse = user_client.get(user_url)
 
     user_content = user_response.content.decode("utf-8")
 
-    anothers_same_page_response: HttpResponse = another_user_client.get(  # type: ignore
+    anothers_same_page_response: HttpResponse = another_user_client.get(
         user_url
     )
     anothers_same_page_content = anothers_same_page_response.content.decode(
         "utf-8"
     )
 
-    unlogged_same_page_response: HttpResponse = unlogged_client.get(user_url)  # type: ignore
+    unlogged_same_page_response: HttpResponse = unlogged_client.get(user_url)
     unlogged_same_page_content = unlogged_same_page_response.content.decode(
         "utf-8"
     )
@@ -225,10 +225,10 @@ def get_extra_urls(
         urls_start_with="", start_lineix=-1, end_lineix=-1
     )
     user_links = set(
-        find_links_between_lines(extra_content, **find_links_kwargs)  # type: ignore
+        find_links_between_lines(extra_content, **find_links_kwargs)
     )
     anothers_page_links = set(
-        find_links_between_lines(base_content, **find_links_kwargs)  # type: ignore
+        find_links_between_lines(base_content, **find_links_kwargs)
     )
     diff_urls = [
         x.get("href")

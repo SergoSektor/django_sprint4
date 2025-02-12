@@ -50,7 +50,7 @@ class TextareaMismatchException(FormValidationException):
     pass
 
 
-class FormValidationException(Exception):  # type: ignore[no-redef]
+class FormValidationException(Exception):
     pass
 
 
@@ -444,8 +444,8 @@ class SubmitTester(ABC):
         self._test_response_cbk = test_response_cbk
 
     def test_submit(self, url: str, data: dict) -> HttpResponse:
-        assert isinstance(self.client, django.test.Client)  # type: ignore
-        response = self.client.post(url, data=data, follow=True)  # type: ignore
+        assert isinstance(self.client, django.test.Client)
+        response = self.client.post(url, data=data, follow=True)
         if self._test_response_cbk:
             self._test_response_cbk(response)
         return response
@@ -524,7 +524,6 @@ class AuthorisedSubmitTester(SubmitTester):
         self.client = tester.user_client
 
     @staticmethod
-    # type: ignore
     def get_test_response_redirect_cbk(
         tester: BaseTester,
         by_user: Optional[str] = None,

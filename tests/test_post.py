@@ -7,7 +7,7 @@ from typing import Tuple, Type, List
 
 import django.test.client
 import pytest
-import pytz  # type: ignore
+import pytz
 from django.db.models import Model, ImageField, DateTimeField
 from django.forms import BaseForm
 from django.http import HttpResponse
@@ -134,7 +134,7 @@ def test_post(
     )
     delete_tester.test_delete_item(
         qs=item_to_delete_adapter.item_cls.objects.all(),
-        delete_url_addr=del_url_addr,  # type: ignore
+        delete_url_addr=del_url_addr,
     )
     try:
         AuthorisedSubmitTester(
@@ -142,7 +142,7 @@ def test_post(
             test_response_cbk=SubmitTester.get_test_response_404_cbk(
                 err_msg=delete_tester.nonexistent_obj_error_message
             ),
-        ).test_submit(url=del_url_addr, data={})  # type: ignore
+        ).test_submit(url=del_url_addr, data={})
     except Post.DoesNotExist:
         raise AssertionError(del_unexisting_status_404_err_msg)
 
@@ -301,7 +301,7 @@ def _test_create_items(
     except FormValidationException as e:
         raise AssertionError(
             "Убедитесь, что для валидации"
-            f" {creation_tester.of_which_form} достаточно заполнить следующие"  # type: ignore
+            f" {creation_tester.of_which_form} достаточно заполнить следующие"
             f" поля: {list(forms_to_create[0].data.keys())}. При валидации"
             f" формы возникли следующие ошибки: {e}"
         )
