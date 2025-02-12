@@ -548,7 +548,7 @@ class TestContent:
         post = post_with_published_location
         post_adapter = PostModelAdapter(post)
 
-        testers: List[PostContentTester] = [
+        testers: List[PostContentTester] = [  # type: ignore
             self.profile_tester,
             self.main_tester,
             self.category_tester,

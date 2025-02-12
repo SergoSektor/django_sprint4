@@ -58,7 +58,7 @@ class StudentModelAdapter(ModelAdapter):
             raise AssertionError(
                 f"В модели `{self.ItemModel.__name__}` создайте поле типа"
                 f" `{adapter_field_key[0]}`, которое"
-                f" {self.AdapterFields.field_description[name]}."
+                f" {self.AdapterFields.field_description[name]}."  # type: ignore
             )
         return getattr(self._item_or_cls, item_field_name)
 

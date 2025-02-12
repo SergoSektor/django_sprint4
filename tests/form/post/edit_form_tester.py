@@ -49,7 +49,7 @@ class EditPostFormTester(PostFormTester):
 
     @property
     def unauthorized_edit_redirect_cbk(self):
-        redirect_to_page: TitledUrlRepr = (
+        redirect_to_page: TitledUrlRepr = (  # type: ignore
             UrlRepr(r"/posts/\d+/$", "/posts/<int:post_id>/"),
             "страницу публикации",
         )
