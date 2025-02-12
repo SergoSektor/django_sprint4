@@ -98,14 +98,13 @@ class ContentTester(ABC):
             response = client.get(url)
             if response.status_code not in assert_status_in:
                 raise Exception
-        except Exception as error:
+        except Exception:
             if inspect.isfunction(assert_cbk):
                 assert_cbk()
             elif isinstance(assert_cbk, str):
                 getattr(self, assert_cbk)()
             else:
-                raise AssertionError(
-                    "Wrong type of `assert_cbk` argument.") from error
+                raise AssertionError("Wrong type of `assert_cbk` argument.")
 
         return response
 
@@ -402,7 +401,7 @@ class TestContent:
         else:
             context_posts = response.context.get(items_key)
             assert (
-                len(context_posts) == 1
+                    len(context_posts) == 1
             ), ("Убедитесь, что на странице пользователя "
                 "не отображаются публикации других авторов.")
 
@@ -549,7 +548,7 @@ class TestContent:
         post = post_with_published_location
         post_adapter = PostModelAdapter(post)
 
-        testers: List[PostContentTester] = [  # type: ignore
+        testers: List[PostContentTester] = [
             self.profile_tester,
             self.main_tester,
             self.category_tester,

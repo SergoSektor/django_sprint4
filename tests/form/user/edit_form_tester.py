@@ -101,26 +101,26 @@ class EditUserFormTester(BaseFormTester):
     ) -> HttpResponse:
         try:
             return super().test_edit_item(updated_form, qs, item_adapter)
-        except UnauthorizedEditException as error:
+        except UnauthorizedEditException:
             raise AssertionError(
                 "Убедитесь, что пользователь не может редактировать чужой"
                 " профиль пользователя."
-            ) from error
-        except UnauthenticatedEditException as error:
+            )
+        except UnauthenticatedEditException:
             raise AssertionError(
                 "Убедитесь, что неаутентифицированный пользователь не может"
                 " редактировать профиль пользователя."
-            ) from error
-        except AuthenticatedEditException as error:
+            )
+        except AuthenticatedEditException:
             raise AssertionError(
                 "Убедитесь, что пользователь может редактировать свой"
                 " профиль."
-            ) from error
-        except DatabaseCreationException as error:
+            )
+        except DatabaseCreationException:
             raise AssertionError(
                 "Убедитесь, что при редактировании профиля пользователя в"
                 " базе данных не создаётся новый объект профиля пользователя."
-            ) from error
+            )
 
     def redirect_error_message(
         self, by_user: str, redirect_to_page: Union[TitledUrlRepr, str]

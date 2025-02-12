@@ -27,7 +27,7 @@ def _test_edit(
     **update_props
 ) -> HttpResponse:
     edit_url = edit_url_vs_printed_url.key
-    item_adapter = ModelAdapter(item)  # type: ignore
+    item_adapter = ModelAdapter(item)
     ItemModel = type(item)
 
     def create_updated_form(**updated_props):
@@ -45,7 +45,7 @@ def _test_edit(
 
     updated_form = create_updated_form(**update_props)
 
-    response = get_get_response_safely(user_client, edit_url)  # type: ignore
+    response = get_get_response_safely(user_client, edit_url)
     tester = EditFormTester(
         response,
         ItemModel,
