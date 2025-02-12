@@ -195,11 +195,10 @@ def test_post(
     @contextmanager
     def set_post_postponed(post_adapter):
         pub_date = post_adapter.pub_date
-        current_date = timezone.now()
+        current_year = timezone.now().year
         try:
             post_adapter.pub_date = post_adapter.pub_date.replace(
-                year=current_date.year + 1,
-                day=current_date.day - 1 or current_date.day)
+                year=current_year + 1)
             post_adapter.save()
             yield
         finally:
